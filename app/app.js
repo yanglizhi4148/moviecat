@@ -7,7 +7,8 @@
     angular
         .module('moviecat',[
             'moviecat.home_page',
-            'moviecat.movieList'
+            'moviecat.movieList',
+            'moviecat.jsonp'
             /*'moviecat.in_theaters',
             'moviecat.top250',
             'moviecat.coming_soon'*/
