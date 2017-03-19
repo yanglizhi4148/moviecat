@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html>
-<head lang="en">
-    <meta charset="UTF-8">
-    <title></title>
-</head>
-<body>
-
-</body>
-</html>
+<!--电影列表开始-->
+<div class="list">
+    <ul>
+        <li ng-repeat="movie in movieList.subjects track by $index">
+            <a href="#/details">
+                <!--浏览器会优先解析图片的src属性，来发送请求请求图片-->
+                <!--使用ng-src指令，angular会解析这个指令，并且解析完毕以后，会自动给当前-->
+                <!--图片元素添加一个src属性，属性的值就是：{{movie.images.large}}的值，这样-->
+                <!--图片路径就可以被正确解析了-->
+                <img src="{{movie.images.large}}" alt="">
+            </a>
+            <div class="meta">
+                <h4><span>{{movie.title}}</span> <em>{{movie.rating.average}}分</em></h4>
+                <div class="otherinfo">类型:<span ng-repeat="gen in movie.genres track by $index">{{gen}}</span></div>
+            </div>
+        </li>
+    </ul>
+    <div class="paging">
+        <label>总共：0条记录,第0/0页;</label>
+        <!-- 加上disable类样式，表示按钮禁用状态 -->
+        <button class="prev disable ">上一页</button>
+        <button class="next">下一页</button>
+    </div>
+</div>
+<!--电影列表结束-->

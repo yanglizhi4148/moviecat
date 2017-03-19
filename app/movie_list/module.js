@@ -1,3 +1,28 @@
 /**
- * Created by ��ɪ on 2017/3/18.
+ * Created by 琴瑟 on 2017/3/18.
  */
+(function(angular){
+    //创建电影列表模块，统一实现其他三个模块的功能
+    angular
+        .module('moviecat.movieList',['ngRoute'])
+        .config(['$routeProvider',function($routeProvider){
+            $routeProvider.when('/:movieType',{
+                templateUrl:'./movie_list/view.html',
+                controller:'MovieListController'
+            });
+        }])
+        .controller('MovieListController',['$scope','$http','$routeParams',function($scope,$http,$routeParams){
+            //获取到路由参数，即：电影类型
+            console.log($routeParams);
+            $http({
+                method:'GET',
+                yrl:'./movie_list/data.json'
+            })
+                .then(function(response){
+                    console.log(response);
+                    $scope.movieList=response.data;
+                },function(response){
+                    console.log('报错了');
+                });
+        }])
+})(angular);
