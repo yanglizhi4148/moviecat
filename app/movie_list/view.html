@@ -2,7 +2,7 @@
 <div class="list">
     <ul>
         <li ng-repeat="movie in movieList.subjects track by $index">
-            <a href="#/details">
+            <a href="#/subject/{{movie.id}}">
                 <!--浏览器会优先解析图片的src属性，来发送请求请求图片-->
                 <!--使用ng-src指令，angular会解析这个指令，并且解析完毕以后，会自动给当前-->
                 <!--图片元素添加一个src属性，属性的值就是：{{movie.images.large}}的值，这样-->
@@ -23,3 +23,14 @@
     </div>
 </div>
 <!--电影列表结束-->
+<!--加载动画开始-->
+<div class="mask" ng-show="isLoading">
+    <div class="spinner">
+        <div class="rect1"></div>
+        <div class="rect2"></div>
+        <div class="rect3"></div>
+        <div class="rect4"></div>
+        <div class="rect5"></div>
+    </div>
+</div>
+<!--加载动画结束-->

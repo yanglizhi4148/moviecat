@@ -10,5 +10,19 @@
                 //路径是相对于index.html页面的
                 templateUrl:'./home_page/view.html'
             })
+                .otherwise({
+                    redirectTo:'/home_page'
+                })
         }])
+        .controller('SearchController',['$scope','$location',function($scope,$location){
+            $scope.searchText='';
+
+            $scope.search=function(){
+                if($scope.searchText.trim()===''){
+                    return;
+                }
+                //通过$location.url()传入参数，就表示设置hash值
+                $location.url('/search?q='+$scope.searchText);
+            };
+        }]);
 })(angular);

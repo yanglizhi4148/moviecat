@@ -7,11 +7,14 @@
     angular
         .module('moviecat',[
             'moviecat.home_page',
+            //将details模块在movieList之前引入即可
+            'moviecat.details',
             'moviecat.movieList',
-            'moviecat.jsonp'
+            'moviecat.jsonp',
+            'moviecat.menu-active'
             /*'moviecat.in_theaters',
             'moviecat.top250',
             'moviecat.coming_soon'*/
-        ])
+        ]);
 
 })(angular);
