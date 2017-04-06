@@ -6,7 +6,7 @@
     angular
         .module('moviecat.movieList',['ngRoute'])
         .config(['$routeProvider',function($routeProvider){
-            $routeProvider.when('/:movieType/:pages?',{
+            $routeProvider.when('/:movieType/:page?',{
                 templateUrl:'./movie_list/view.html',
                 controller:'MovieListController'
             });
@@ -41,21 +41,25 @@
                 $route.updateParams({page:currentPage});
             };
 
-            //根
+            //根据不同的路由，请求不同的接口，获取相对于那个的数据
             JsonpSrv.jsonp('https://api.douban.com/v2/movie/'+$routeParams.movieType,{
                 start:startNum,
-                count:COUNT
+                count:COUNT,
+                //这个q是为了电影搜索功能添加的参数，但是对于其他接口来说
+                //因为其他的接口是不会获取q参数的，所以多了一个q参数，也不会对其他
+                //接口产生影响
+                q:$routeParams.q||''
             },function(data){
                 //在回调函数中获取到jsonp返回的数据
                 console.log(data);
-                //
+                //因为发送JSONP请求是一个异步操作，异步操作时不会触发angular的双向绑定机制的
                 $scope.movieList=data;
 
                 $scope.totalPage=Math.ceil(data.total/COUNT);
 
                 //隐藏加载动画效果
                 $scope.isLoading=false;
-                //
+                //手动触发angular的双向绑定机制，触发该机制，将数据的变化映射到视图中
                 $scope.$apply();
             });
         }])
